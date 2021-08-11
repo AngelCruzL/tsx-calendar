@@ -1,9 +1,11 @@
 import React from 'react';
 
+import AppRouter from './components/router/AppRouter';
+
 function CalendarApp() {
   return (
     <div>
-      <h1>CalendarApp</h1>
+      <AppRouter />
     </div>
   );
 }
