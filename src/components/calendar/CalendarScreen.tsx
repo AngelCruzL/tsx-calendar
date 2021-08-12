@@ -31,8 +31,8 @@ const events: CustomEvent = {
 };
 
 const CalendarScreen = () => {
-  const [lastView, setLastView] = useState(
-    localStorage.getItem('lastView') || 'month'
+  const [lastView, setLastView] = useState<View>(
+    (localStorage.getItem('lastView') as View) || 'month'
   );
 
   const onDobleClick = (e: CustomEvent) => {
