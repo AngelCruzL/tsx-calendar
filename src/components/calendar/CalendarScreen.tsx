@@ -1,36 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Calendar,
-  Event,
   EventPropGetter,
   momentLocalizer,
+  View,
 } from 'react-big-calendar';
 import moment from 'moment';
 
 import Navbar from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages-es';
+import CalendarEvent from './CalendarEvent';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/dist/locale/es';
+import { CustomEvent } from '../../interfaces';
 
 moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
-const events: Event = {
+const events: CustomEvent = {
   title: 'Cumpleaños de Ángel',
   start: moment().toDate(),
   end: moment().add(2, 'hours').toDate(),
+  notes: 'Comprar el pastel',
+  user: {
+    _id: '115',
+    name: 'Luis',
+  },
 };
 
 const CalendarScreen = () => {
-  const eventStyleGetter: EventPropGetter<Event> = (
-    event,
-    start,
-    end,
-    isSelected
-  ) => {
-    console.log(event, start, end, isSelected);
+  const [lastView, setLastView] = useState(
+    localStorage.getItem('lastView') || 'month'
+  );
+
+  const onDobleClick = (e: CustomEvent) => {
+    console.log('onDobleClick', e);
+  };
+
+  const onSelectEvent = (e: CustomEvent) => {
+    console.log('onSelectEvent', e);
+  };
+
+  const onViewChange = (e: View) => {
+    setLastView(e);
+    localStorage.setItem('lastView', e);
+  };
+
+  // prettier-ignore
+  const eventStyleGetter: EventPropGetter<CustomEvent> = (event, start, end, isSelected) => {
+    // console.log(event, start, end, isSelected);
     const style = {
       backgroundColor: '#367CF7',
       borderRadius: '0',
@@ -53,6 +73,13 @@ const CalendarScreen = () => {
         endAccessor="end"
         messages={messages}
         eventPropGetter={eventStyleGetter}
+        onDoubleClickEvent={onDobleClick}
+        onSelectEvent={onSelectEvent}
+        onView={onViewChange}
+        view={lastView}
+        components={{
+          event: CalendarEvent,
+        }}
       />
     </div>
   );
