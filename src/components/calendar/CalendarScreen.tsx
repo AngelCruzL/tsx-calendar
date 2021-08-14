@@ -8,12 +8,13 @@ import {
 import moment from 'moment';
 
 import Navbar from '../ui/Navbar';
-import { messages } from '../../helpers/calendar-messages-es';
 import CalendarEvent from './CalendarEvent';
+import CalendarModal from './CalendarModal';
+import { messages } from '../../helpers/calendar-messages-es';
+import { CustomEvent } from '../../interfaces';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/dist/locale/es';
-import { CustomEvent } from '../../interfaces';
 
 moment.locale('es');
 
@@ -81,6 +82,8 @@ const CalendarScreen = () => {
           event: CalendarEvent,
         }}
       />
+
+      <CalendarModal />
     </div>
   );
 };
