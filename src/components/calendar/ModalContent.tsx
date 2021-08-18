@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 
+import { CustomEvent } from '../../interfaces';
+
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
@@ -13,21 +15,44 @@ function ModalContent() {
   const [dateStart, setDateStart] = useState(now.toDate());
   const [dateEnd, setDateEnd] = useState(endDate.toDate());
 
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<CustomEvent>({
     title: 'Evento',
     notes: '',
     start: now.toDate(),
     end: endDate.toDate(),
   });
 
-  const handleStartDateChange = e => {
-    setDateStart(e);
-    console.log(e);
+  const { title, notes } = formValues;
+
+  const handleInputChange = (e: {
+    target: HTMLInputElement | HTMLTextAreaElement;
+  }) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleEndDateChange = e => {
+  const handleStartDateChange = (e: Date) => {
+    setDateStart(e);
+    setFormValues({
+      ...formValues,
+      start: e,
+    });
+  };
+
+  const handleEndDateChange = (e: Date) => {
     setDateEnd(e);
-    console.log(e);
+    setFormValues({
+      ...formValues,
+      end: e,
+    });
+  };
+
+  const handleSubmitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log(formValues);
   };
 
   return (
@@ -35,7 +60,7 @@ function ModalContent() {
       <h1> Nuevo evento </h1>
       <hr />
 
-      <form className="container">
+      <form className="container" onSubmit={handleSubmitForm}>
         <div className="form-group">
           <label>Fecha y hora inicio</label>
           <DateTimePicker
@@ -64,6 +89,8 @@ function ModalContent() {
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
+            value={title}
+            onChange={handleInputChange}
           />
           <small id="emailHelp" className="form-text text-muted">
             Una descripción corta
@@ -76,6 +103,8 @@ function ModalContent() {
             placeholder="Notas"
             rows={5}
             name="notes"
+            value={notes}
+            onChange={handleInputChange}
           ></textarea>
           <small id="emailHelp" className="form-text text-muted">
             Información adicional
