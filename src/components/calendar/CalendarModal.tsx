@@ -1,30 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
+
+import ModalContent from './ModalContent';
 
 import { customStyles } from './modalStyles';
 
 Modal.setAppElement('#root');
 
 function CalendarModal() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const closeModal = () => {};
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={true}
       onRequestClose={closeModal}
       style={customStyles}
       closeTimeoutMS={200}
       className="modal"
       overlayClassName="modal-fondo"
     >
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
-      <h1>Hello</h1>
+      <ModalContent />
     </Modal>
   );
 }
