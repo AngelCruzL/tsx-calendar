@@ -43,7 +43,7 @@ function LoginScreen() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h2 className="h2">Welcome Back!</h2>
-              <p>
+              <p className="p">
                 To keep connected with us please login with your personal info
               </p>
               <button
@@ -56,7 +56,9 @@ function LoginScreen() {
             </div>
             <div className="overlay-panel overlay-right">
               <h2 className="h2">Hello, Friend!</h2>
-              <p>Enter your personal details and start journey with us</p>
+              <p className="p">
+                Enter your personal details and start journey with us
+              </p>
               <button
                 className="button ghost"
                 id="signUp"

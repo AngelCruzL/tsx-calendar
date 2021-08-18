@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import DatePicker, { setDefaultLocale } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
+import Swal from 'sweetalert2';
 
 import { CustomEvent } from '../../interfaces';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const endDate = now.clone().add(1, 'hours');
-
-setDefaultLocale('es');
 
 function ModalContent() {
   const [dateStart, setDateStart] = useState(now.toDate());
@@ -57,11 +56,12 @@ function ModalContent() {
     const momentEnd = moment(end);
 
     if (momentStart.isSameOrAfter(momentEnd)) {
-      console.log(100);
+      return Swal.fire(
+        'Error!',
+        'La fecha final debe ser mayor a la fecha de inicio',
+        'error'
+      );
     }
-    console.log('wii');
-    console.log(momentStart);
-    console.log(momentEnd);
   };
 
   return (
