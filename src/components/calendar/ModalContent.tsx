@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
+import DatePicker, { setDefaultLocale } from 'react-datepicker';
 
 import { CustomEvent } from '../../interfaces';
 
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const endDate = now.clone().add(1, 'hours');
+
+setDefaultLocale('es');
 
 function ModalContent() {
   const [dateStart, setDateStart] = useState(now.toDate());
@@ -22,7 +23,7 @@ function ModalContent() {
     end: endDate.toDate(),
   });
 
-  const { title, notes } = formValues;
+  const { title, notes, start, end } = formValues;
 
   const handleInputChange = (e: {
     target: HTMLInputElement | HTMLTextAreaElement;
@@ -52,7 +53,15 @@ function ModalContent() {
   const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(formValues);
+    const momentStart = moment(start);
+    const momentEnd = moment(end);
+
+    if (momentStart.isSameOrAfter(momentEnd)) {
+      console.log(100);
+    }
+    console.log('wii');
+    console.log(momentStart);
+    console.log(momentEnd);
   };
 
   return (
@@ -63,20 +72,30 @@ function ModalContent() {
       <form className="container" onSubmit={handleSubmitForm}>
         <div className="form-group">
           <label>Fecha y hora inicio</label>
-          <DateTimePicker
-            onChange={handleStartDateChange}
-            value={dateStart}
+          <DatePicker
+            selected={dateStart}
             className="form-control"
+            onChange={handleStartDateChange}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={5}
+            timeCaption="time"
+            dateFormat="MMM d, yyyy h:mm aa"
           />
         </div>
 
         <div className="form-group">
           <label>Fecha y hora fin</label>
-          <DateTimePicker
-            onChange={handleEndDateChange}
-            value={dateEnd}
-            minDate={dateStart}
+          <DatePicker
+            selected={dateEnd}
             className="form-control"
+            onChange={handleEndDateChange}
+            minDate={dateStart}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={5}
+            timeCaption="time"
+            dateFormat="MMM d, yyyy h:mm aa"
           />
         </div>
 
