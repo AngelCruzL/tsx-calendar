@@ -7,7 +7,7 @@ function CalendarEvent({ event }: { event: CustomEvent }) {
   return (
     <div>
       <strong>{title}</strong>
-      <span> - {user.name}</span>
+      <span> - {user!.name}</span>
     </div>
   );
 }

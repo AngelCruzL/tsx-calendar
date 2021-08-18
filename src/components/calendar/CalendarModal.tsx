@@ -8,7 +8,9 @@ import { customStyles } from './modalStyles';
 Modal.setAppElement('#root');
 
 function CalendarModal() {
-  const closeModal = () => {};
+  const closeModal = () => {
+    console.log('Close');
+  };
 
   return (
     <Modal
@@ -19,7 +21,7 @@ function CalendarModal() {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      <ModalContent />
+      <ModalContent closeModal={closeModal} />
     </Modal>
   );
 }

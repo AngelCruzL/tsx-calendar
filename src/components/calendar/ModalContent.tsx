@@ -11,9 +11,10 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const endDate = now.clone().add(1, 'hours');
 
-function ModalContent() {
+const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const [dateStart, setDateStart] = useState(now.toDate());
   const [dateEnd, setDateEnd] = useState(endDate.toDate());
+  const [validTitle, setValidTitle] = useState(true);
 
   const [formValues, setFormValues] = useState<CustomEvent>({
     title: 'Evento',
@@ -62,6 +63,14 @@ function ModalContent() {
         'error'
       );
     }
+
+    if (title!.trim().length < 2) {
+      return setValidTitle(false);
+    }
+
+    closeModal();
+
+    // TODO: Guardar en base de datos
   };
 
   return (
@@ -104,7 +113,7 @@ function ModalContent() {
           <label>Titulo y notas</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${!validTitle && 'is-invalid'}`}
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
@@ -137,6 +146,6 @@ function ModalContent() {
       </form>
     </>
   );
-}
+};
 
 export default ModalContent;
