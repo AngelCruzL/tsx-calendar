@@ -10,6 +10,7 @@ import {
 } from 'react-big-calendar';
 
 import Navbar from '../ui/Navbar';
+import AddNewFab from '../ui/AddNewFab';
 import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import { messages } from '../../helpers/calendar-messages-es';
@@ -51,6 +52,7 @@ const CalendarScreen = () => {
 
   const onSelectEvent = (e: CustomEvent) => {
     dispatch(eventSetActive(e));
+    dispatch(uiOpenModal());
   };
 
   const onViewChange = (e: View) => {
@@ -91,6 +93,8 @@ const CalendarScreen = () => {
           event: CalendarEvent,
         }}
       />
+
+      <AddNewFab />
 
       <CalendarModal />
     </div>
