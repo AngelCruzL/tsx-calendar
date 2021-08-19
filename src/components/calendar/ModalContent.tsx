@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import Swal from 'sweetalert2';
 
 import { CustomEvent } from '../../interfaces';
-import { eventAddNew } from '../../actions/events';
+import { eventAddNew, eventUpdated } from '../../actions/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -83,15 +83,20 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
       return setValidTitle(false);
     }
 
-    dispatch(
-      eventAddNew({
-        ...formValues,
-        user: {
-          _id: new Date().getTime() + '',
-          name: 'Luis',
-        },
-      })
-    );
+    if (activeEvent) {
+      dispatch(eventUpdated(formValues));
+    } else {
+      dispatch(
+        eventAddNew({
+          ...formValues,
+          id: new Date().getTime(),
+          user: {
+            _id: new Date().getTime() + '',
+            name: 'Luis',
+          },
+        })
+      );
+    }
 
     closeModal();
   };
