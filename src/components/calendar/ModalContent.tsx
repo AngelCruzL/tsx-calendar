@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import Swal from 'sweetalert2';
 
 import { CustomEvent } from '../../interfaces';
+import { eventAddNew } from '../../actions/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -12,6 +14,8 @@ const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const endDate = now.clone().add(1, 'hours');
 
 const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
+  const dispatch = useDispatch();
+
   const [dateStart, setDateStart] = useState(now.toDate());
   const [dateEnd, setDateEnd] = useState(endDate.toDate());
   const [validTitle, setValidTitle] = useState(true);
@@ -68,9 +72,17 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
       return setValidTitle(false);
     }
 
-    closeModal();
+    dispatch(
+      eventAddNew({
+        ...formValues,
+        user: {
+          _id: new Date().getTime() + '',
+          name: 'Luis',
+        },
+      })
+    );
 
-    // TODO: Guardar en base de datos
+    closeModal();
   };
 
   return (

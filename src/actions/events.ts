@@ -6,7 +6,7 @@ export const eventSetActive = (event: CustomEvent) => ({
   payload: event,
 });
 
-export const eventAddNew = event => ({
+export const eventAddNew = (event: CustomEvent) => ({
   type: types.eventAddNew,
   payload: event,
 });
