@@ -14,6 +14,7 @@ import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import { messages } from '../../helpers/calendar-messages-es';
 import { CustomEvent } from '../../interfaces';
+import { eventSetActive } from '../../actions/events';
 
 import { uiOpenModal } from '../../actions/ui';
 
@@ -24,16 +25,18 @@ moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
-const events: CustomEvent = {
-  title: 'Cumpleaños de Ángel',
-  start: moment().toDate(),
-  end: moment().add(2, 'hours').toDate(),
-  notes: 'Comprar el pastel',
-  user: {
-    _id: '115',
-    name: 'Luis',
+const events: CustomEvent[] = [
+  {
+    title: 'Cumpleaños de Ángel',
+    start: moment().toDate(),
+    end: moment().add(2, 'hours').toDate(),
+    notes: 'Comprar el pastel',
+    user: {
+      _id: '115',
+      name: 'Luis',
+    },
   },
-};
+];
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
@@ -47,7 +50,7 @@ const CalendarScreen = () => {
   };
 
   const onSelectEvent = (e: CustomEvent) => {
-    console.log('onSelectEvent', e);
+    dispatch(eventSetActive(e));
   };
 
   const onViewChange = (e: View) => {
@@ -75,7 +78,7 @@ const CalendarScreen = () => {
 
       <Calendar
         localizer={localizer}
-        events={[events]}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         messages={messages}
