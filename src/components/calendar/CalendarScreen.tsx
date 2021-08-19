@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import {
@@ -26,21 +26,9 @@ moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
-const events: CustomEvent[] = [
-  {
-    title: 'Cumpleaños de Ángel',
-    start: moment().toDate(),
-    end: moment().add(2, 'hours').toDate(),
-    notes: 'Comprar el pastel',
-    user: {
-      _id: '115',
-      name: 'Luis',
-    },
-  },
-];
-
 const CalendarScreen = () => {
   const dispatch = useDispatch();
+  const { events } = useSelector(state => state.calendar);
 
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('lastView') as View) || 'month'
