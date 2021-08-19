@@ -40,7 +40,6 @@ const CalendarScreen = () => {
 
   const onSelectEvent = (e: CustomEvent) => {
     dispatch(eventSetActive(e));
-    dispatch(uiOpenModal());
   };
 
   const onViewChange = (e: View) => {

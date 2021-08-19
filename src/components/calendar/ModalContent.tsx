@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import Swal from 'sweetalert2';
@@ -21,13 +21,24 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const [validTitle, setValidTitle] = useState(true);
 
   const [formValues, setFormValues] = useState<CustomEvent>({
-    title: 'Evento',
+    title: '',
     notes: '',
     start: now.toDate(),
     end: endDate.toDate(),
   });
 
   const { title, notes, start, end } = formValues;
+
+  const { activeEvent } = useSelector(state => state.calendar);
+
+  useEffect(() => {
+    if (activeEvent) {
+      const { start, end } = activeEvent;
+      setDateStart(start);
+      setDateEnd(end);
+      setFormValues(activeEvent);
+    }
+  }, [activeEvent, setFormValues]);
 
   const handleInputChange = (e: {
     target: HTMLInputElement | HTMLTextAreaElement;
