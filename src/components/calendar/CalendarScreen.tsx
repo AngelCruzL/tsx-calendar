@@ -15,7 +15,7 @@ import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import { messages } from '../../helpers/calendar-messages-es';
 import { CustomEvent } from '../../interfaces';
-import { eventSetActive } from '../../actions/events';
+import { clearActive, eventSetActive } from '../../actions/events';
 
 import { uiOpenModal } from '../../actions/ui';
 
@@ -48,6 +48,10 @@ const CalendarScreen = () => {
     localStorage.setItem('lastView', e);
   };
 
+  const onSelectSlot = () => {
+    dispatch(clearActive());
+  };
+
   // prettier-ignore
   const eventStyleGetter: EventPropGetter<CustomEvent> = (event, start, end, isSelected) => {
     // console.log(event, start, end, isSelected);
@@ -76,6 +80,8 @@ const CalendarScreen = () => {
         onDoubleClickEvent={onDobleClick}
         onSelectEvent={onSelectEvent}
         onView={onViewChange}
+        onSelectSlot={onSelectSlot}
+        selectable={true}
         view={lastView}
         components={{
           event: CalendarEvent,

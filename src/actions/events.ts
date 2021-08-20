@@ -11,7 +11,7 @@ export const eventAddNew = (event: CustomEvent) => ({
   payload: event,
 });
 
-export const clearActiveEvent = () => ({ type: types.eventClearActiveEvent });
+export const clearActive = () => ({ type: types.eventClearActive });
 
 export const eventUpdated = (event: CustomEvent) => ({
   type: types.eventUpdated,
