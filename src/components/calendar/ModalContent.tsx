@@ -103,7 +103,7 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
 
   return (
     <>
-      <h1> Nuevo evento </h1>
+      <h1> {activeEvent ? 'Editar evento' : 'Nuevo evento'} </h1>
       <hr />
 
       <form className="container" onSubmit={handleSubmitForm}>

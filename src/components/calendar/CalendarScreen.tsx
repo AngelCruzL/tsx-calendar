@@ -21,6 +21,7 @@ import { uiOpenModal } from '../../actions/ui';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/dist/locale/es';
+import DeleteEventFab from '../ui/DeleteEventFab';
 
 moment.locale('es');
 
@@ -28,7 +29,7 @@ const localizer = momentLocalizer(moment);
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
-  const { events } = useSelector(state => state.calendar);
+  const { events, activeEvent } = useSelector(state => state.calendar);
 
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('lastView') as View) || 'month'
@@ -82,6 +83,8 @@ const CalendarScreen = () => {
       />
 
       <AddNewFab />
+
+      {activeEvent && <DeleteEventFab />}
 
       <CalendarModal />
     </div>
