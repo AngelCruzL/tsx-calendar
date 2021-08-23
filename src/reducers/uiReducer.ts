@@ -1,4 +1,4 @@
-import { ActionUI } from '../interfaces/ActionUI';
+import { ActionUI } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
 const initialState = {

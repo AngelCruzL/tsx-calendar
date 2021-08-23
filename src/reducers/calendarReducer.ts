@@ -1,6 +1,5 @@
 import moment from 'moment';
-import { CustomEvent } from '../interfaces';
-import { ActionEvent } from '../interfaces/ActionEvent';
+import { ActionEvent, CustomEvent } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
 interface initialState {
