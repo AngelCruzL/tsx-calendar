@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import Swal from 'sweetalert2';
-import { fetchWithoutToken } from '../helpers/fetch';
+import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
 import { User } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
@@ -47,7 +47,30 @@ export const startRegister = (email: string, password: string, name:string) => {
   }
 }
 
+export const startChecking = () => {
+  return async (dispatch: Dispatch) => {
+    const res = await fetchWithToken('auth/renew');
+    const body = await res.json();
+
+    if (body.ok) {
+      localStorage.setItem('token', body.token);
+      localStorage.setItem('token-init-date', String(new Date().getTime()));
+
+      dispatch(
+        login({
+          name: body.name,
+          uid: body.uid,
+        })
+      );
+    } else {
+      dispatch(checkingFinish());
+    }
+  };
+};
+
 const login = (user: User) => ({
   type: ActionTypes.authLogin,
   payload: user,
 });
+
+const checkingFinish = () => ({ type: ActionTypes.authCheckingFinish });

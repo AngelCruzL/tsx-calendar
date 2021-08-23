@@ -10,8 +10,14 @@ export const authReducer = (state = initialState, action: ActionAuth) => {
     case ActionTypes.authLogin:
       return {
         ...state,
-        checking: false,
         ...action.payload,
+        checking: false,
+      };
+
+    case ActionTypes.authCheckingFinish:
+      return {
+        ...state,
+        checking: false,
       };
 
     default:
