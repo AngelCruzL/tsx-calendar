@@ -1,13 +1,8 @@
 import moment from 'moment';
-import { ActionEvent, CustomEvent } from '../interfaces';
+import { ActionEvent, InitialState } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
-interface initialState {
-  events: CustomEvent[];
-  activeEvent: CustomEvent | null;
-}
-
-const initialState: initialState = {
+const initialState: InitialState = {
   events: [
     {
       id: new Date().getTime(),

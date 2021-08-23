@@ -1,7 +1,7 @@
-import { ActionUI } from '../interfaces';
+import { ActionUI, InitialState } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
-const initialState = {
+const initialState: InitialState = {
   modalOpen: false,
 };
 

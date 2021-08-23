@@ -1,7 +1,7 @@
-import { ActionAuth } from '../interfaces';
+import { ActionAuth, InitialState } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
-const initialState = {
+const initialState: InitialState = {
   checking: true,
 };
 
