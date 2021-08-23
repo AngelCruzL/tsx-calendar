@@ -74,3 +74,12 @@ const login = (user: User) => ({
 });
 
 const checkingFinish = () => ({ type: ActionTypes.authCheckingFinish });
+
+export const startLogout = () => {
+  return (dispatch: Dispatch) => {
+    localStorage.clear();
+    dispatch(logout());
+  };
+};
+
+const logout = () => ({ type: ActionTypes.authLogout });
