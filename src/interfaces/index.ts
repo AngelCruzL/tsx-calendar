@@ -3,3 +3,4 @@ export { CustomEvent } from './CustomEvent';
 export { ModalStyles } from './ModalStyles';
 export { ActionEvent } from './ActionEvent';
 export { ActionUI } from './ActionUI';
+export { ActionAuth } from './ActionAuth';
