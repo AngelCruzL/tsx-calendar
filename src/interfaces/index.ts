@@ -1,6 +1,7 @@
 export { ActionAuth } from './ActionAuth';
 export { ActionEvent } from './ActionEvent';
 export { ActionUI } from './ActionUI';
+export { CustomAuthenticatedRoute } from './CustomAuthenticatedRoute';
 export { CustomEvent } from './CustomEvent';
 export { CustomFetch } from './CustomFetch';
 export { InitialState } from './InitialState';
