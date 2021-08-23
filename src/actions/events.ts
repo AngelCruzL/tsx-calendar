@@ -1,21 +1,21 @@
 import { CustomEvent } from '../interfaces';
-import { types } from '../types/types';
+import { ActionTypes } from '../types/types';
 
 export const eventSetActive = (event: CustomEvent) => ({
-  type: types.eventSetActive,
+  type: ActionTypes.eventSetActive,
   payload: event,
 });
 
 export const eventAddNew = (event: CustomEvent) => ({
-  type: types.eventAddNew,
+  type: ActionTypes.eventAddNew,
   payload: event,
 });
 
-export const clearActive = () => ({ type: types.eventClearActive });
+export const clearActive = () => ({ type: ActionTypes.eventClearActive });
 
 export const eventUpdated = (event: CustomEvent) => ({
-  type: types.eventUpdated,
+  type: ActionTypes.eventUpdated,
   payload: event,
 });
 
-export const eventDeleted = () => ({ type: types.eventDeleted });
+export const eventDeleted = () => ({ type: ActionTypes.eventDeleted });

@@ -1,10 +1,10 @@
 import moment from 'moment';
 import { CustomEvent } from '../interfaces';
-import { types } from '../types/types';
+import { ActionTypes } from '../types/types';
 
 interface initialState {
   events: CustomEvent[];
-  activeEvent: any[] | null;
+  activeEvent: CustomEvent | null;
 }
 
 const initialState: initialState = {
@@ -26,25 +26,25 @@ const initialState: initialState = {
 
 export const calendarReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case types.eventSetActive:
+    case ActionTypes.eventSetActive:
       return {
         ...state,
         activeEvent: action.payload,
       };
 
-    case types.eventAddNew:
+    case ActionTypes.eventAddNew:
       return {
         ...state,
         events: [...state.events, action.payload],
       };
 
-    case types.eventClearActive:
+    case ActionTypes.eventClearActive:
       return {
         ...state,
         activeEvent: null,
       };
 
-    case types.eventUpdated:
+    case ActionTypes.eventUpdated:
       return {
         ...state,
         events: state.events.map(e =>
@@ -52,10 +52,10 @@ export const calendarReducer = (state = initialState, action: any) => {
         ),
       };
 
-    case types.eventDeleted:
+    case ActionTypes.eventDeleted:
       return {
         ...state,
-        events: state.events.filter(e => e.id !== state.activeEvent.id),
+        events: state.events.filter(e => e.id !== state.activeEvent!.id),
         activeEvent: null,
       };
 
