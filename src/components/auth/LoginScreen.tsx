@@ -1,7 +1,26 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { useForm } from '../../hooks/useForm';
+import { startLogin } from '../../actions/auth';
+
 import './login.css';
 
+interface FormLogin {
+  loginEmail: string;
+  loginPassword: string;
+}
+
 function LoginScreen() {
+  const dispatch = useDispatch();
+
+  const [formLoginValues, handleLoginInputChange] = useForm({
+    loginEmail: 'email@email.com',
+    loginPassword: '1234567',
+  });
+
+  const { loginEmail, loginPassword } = formLoginValues;
+
   const toggleSignInState = (signInForm = true) => {
     const container = document.getElementById('container');
 
@@ -9,6 +28,12 @@ function LoginScreen() {
       signInForm
         ? container.classList.add('right-panel-active')
         : container.classList.remove('right-panel-active');
+  };
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    dispatch(startLogin(loginEmail, loginPassword));
   };
 
   return (
@@ -29,10 +54,24 @@ function LoginScreen() {
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form className="form-login">
+          <form className="form-login" onSubmit={handleLogin}>
             <h2 className="h2">Sign in</h2>
-            <input className="input" type="email" placeholder="Email" />
-            <input className="input" type="password" placeholder="Password" />
+            <input
+              className="input"
+              type="email"
+              placeholder="Email"
+              name="loginEmail"
+              value={loginEmail}
+              onChange={handleLoginInputChange}
+            />
+            <input
+              className="input"
+              type="password"
+              placeholder="Password"
+              name="loginPassword"
+              value={loginPassword}
+              onChange={handleLoginInputChange}
+            />
             <a href="#" className="forgot-password">
               Forgot your password?
             </a>
