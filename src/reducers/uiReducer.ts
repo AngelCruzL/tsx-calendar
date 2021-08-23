@@ -1,10 +1,11 @@
+import { ActionUI } from '../interfaces/ActionUI';
 import { ActionTypes } from '../types/types';
 
 const initialState = {
   modalOpen: false,
 };
 
-export const uiReducer = (state = initialState, action: any) => {
+export const uiReducer = (state = initialState, action: ActionUI) => {
   switch (action.type) {
     case ActionTypes.uiOpenModal:
       return {
