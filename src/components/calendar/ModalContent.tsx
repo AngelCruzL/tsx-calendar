@@ -9,6 +9,7 @@ import { eventAddNew, eventUpdated } from '../../actions/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { ReducersState } from '../../reducers/rootReducer';
 
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const endDate = now.clone().add(1, 'hours');
@@ -29,13 +30,13 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
 
   const { title, notes, start, end } = formValues;
 
-  const { activeEvent } = useSelector(state => state.calendar);
+  const { activeEvent } = useSelector((state: ReducersState) => state.calendar);
 
   useEffect(() => {
     if (activeEvent) {
       const { start, end } = activeEvent;
-      setDateStart(start);
-      setDateEnd(end);
+      setDateStart(start || new Date());
+      setDateEnd(end || new Date());
       setFormValues(activeEvent);
     }
   }, [activeEvent, setFormValues]);

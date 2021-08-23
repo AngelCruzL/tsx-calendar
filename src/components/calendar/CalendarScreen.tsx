@@ -22,6 +22,7 @@ import { uiOpenModal } from '../../actions/ui';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/dist/locale/es';
 import DeleteEventFab from '../ui/DeleteEventFab';
+import { ReducersState } from '../../reducers/rootReducer';
 
 moment.locale('es');
 
@@ -29,7 +30,9 @@ const localizer = momentLocalizer(moment);
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
-  const { events, activeEvent } = useSelector(state => state.calendar);
+  const { events, activeEvent } = useSelector(
+    (state: ReducersState) => state.calendar
+  );
 
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('lastView') as View) || 'month'

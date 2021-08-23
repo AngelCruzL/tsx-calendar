@@ -7,13 +7,14 @@ import { uiCloseModal } from '../../actions/ui';
 
 import { customStyles } from './modalStyles';
 import { clearActive } from '../../actions/events';
+import { ReducersState } from '../../reducers/rootReducer';
 
 Modal.setAppElement('#root');
 
 function CalendarModal() {
   const dispatch = useDispatch();
 
-  const { modalOpen } = useSelector(state => state.ui);
+  const { modalOpen } = useSelector((state: ReducersState) => state.ui);
 
   const closeModal = () => {
     dispatch(uiCloseModal());
