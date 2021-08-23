@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import Swal from 'sweetalert2';
 import { fetchWithoutToken } from '../helpers/fetch';
 import { User } from '../interfaces';
 import { ActionTypes } from '../types/types';
@@ -18,6 +19,8 @@ export const startLogin = (email: string, password: string) => {
           uid: body.uid,
         })
       );
+    } else {
+      Swal.fire('Error', body.message, 'error');
     }
   };
 };
