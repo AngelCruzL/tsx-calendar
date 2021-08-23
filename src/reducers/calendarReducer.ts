@@ -16,7 +16,7 @@ const initialState: initialState = {
       end: moment().add(2, 'hours').toDate(),
       notes: 'Comprar el pastel',
       user: {
-        _id: '115',
+        uid: '115',
         name: 'Luis',
       },
     },

@@ -92,7 +92,7 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           ...formValues,
           id: new Date().getTime(),
           user: {
-            _id: new Date().getTime() + '',
+            uid: new Date().getTime() + '',
             name: 'Luis',
           },
         })
