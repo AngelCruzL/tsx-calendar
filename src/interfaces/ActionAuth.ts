@@ -1,4 +1,5 @@
 import { ActionTypes } from '../types/types';
+import { User } from './User';
 
 interface CheckingAction {
   type: ActionTypes.authChecking;
@@ -14,6 +15,7 @@ interface StartLoginAction {
 
 interface LoginAction {
   type: ActionTypes.authLogin;
+  payload: User;
 }
 
 interface StartRegisterAction {
