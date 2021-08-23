@@ -1,11 +1,19 @@
 interface BasicDataFetch {
-  email?: string;
-  password?: string;
+  email: string;
+  name?: string;
+  password: string;
 }
 
 interface LoginFetch {
-  loginEmail?: string;
-  loginPassword?: string;
+  loginEmail: string;
+  loginPassword: string;
 }
 
-export type CustomFetch = LoginFetch | BasicDataFetch;
+interface RegisterFetch {
+  registerEmail: string;
+  registerName: string;
+  registerPassword: string;
+  registerPasswordConfirmation: string;
+}
+
+export type CustomFetch = LoginFetch | BasicDataFetch | RegisterFetch;

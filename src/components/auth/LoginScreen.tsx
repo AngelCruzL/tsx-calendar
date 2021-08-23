@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 
 import { useForm } from '../../hooks/useForm';
-import { startLogin } from '../../actions/auth';
+import { startLogin, startRegister } from '../../actions/auth';
 
 import './login.css';
 
@@ -19,7 +20,16 @@ function LoginScreen() {
     loginPassword: '1234567',
   });
 
+  const [formRegisterValues, handleRegisterInputChange] = useForm({
+    registerName: 'Cool Name',
+    registerEmail: 'cool@email.com',
+    registerPassword: '1234567',
+    registerPasswordConfirmation: '1234567',
+  });
+
   const { loginEmail, loginPassword } = formLoginValues;
+  // prettier-ignore
+  const { registerEmail,registerName,registerPassword,registerPasswordConfirmation } = formRegisterValues;
 
   const toggleSignInState = (signInForm = true) => {
     const container = document.getElementById('container');
@@ -30,9 +40,17 @@ function LoginScreen() {
         : container.classList.remove('right-panel-active');
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (registerPassword.trim() !== registerPasswordConfirmation.trim())
+      return Swal.fire('Error', 'Las contraseñas deben ser iguales', 'error');
+
+    dispatch(startRegister(registerEmail, registerPassword, registerName));
+  };
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(startLogin(loginEmail, loginPassword));
   };
 
@@ -40,15 +58,39 @@ function LoginScreen() {
     <div className="wrapper">
       <div className="center-container" id="container">
         <div className="form-container sign-up-container">
-          <form className="form-login">
+          <form className="form-login" onSubmit={handleRegister}>
             <h2 className="h2">Create Account</h2>
-            <input className="input" type="text" placeholder="Name" />
-            <input className="input" type="email" placeholder="Email" />
-            <input className="input" type="password" placeholder="Password" />
+            <input
+              className="input"
+              type="text"
+              placeholder="Name"
+              name="registerName"
+              value={registerName}
+              onChange={handleRegisterInputChange}
+            />
+            <input
+              className="input"
+              type="email"
+              placeholder="Email"
+              name="registerEmail"
+              value={registerEmail}
+              onChange={handleRegisterInputChange}
+            />
+            <input
+              className="input"
+              type="password"
+              placeholder="Password"
+              name="registerPassword"
+              value={registerPassword}
+              onChange={handleRegisterInputChange}
+            />
             <input
               className="input"
               type="password"
               placeholder="Confirm your password"
+              name="registerPasswordConfirmation"
+              value={registerPasswordConfirmation}
+              onChange={handleRegisterInputChange}
             />
             <button className="button">Sign Up</button>
           </form>

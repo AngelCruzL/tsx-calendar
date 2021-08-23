@@ -25,6 +25,28 @@ export const startLogin = (email: string, password: string) => {
   };
 };
 
+// prettier-ignore
+export const startRegister = (email: string, password: string, name:string) => {
+  return async (dispatch:Dispatch) => {
+    const res = await fetchWithoutToken('auth/new', { email, password, name }, "POST")
+    const body = await res.json();
+
+    if (body.ok) {
+      localStorage.setItem('token', body.token);
+      localStorage.setItem('token-init-date', String(new Date().getTime()));
+
+      dispatch(
+        login({
+          name: body.name,
+          uid: body.uid,
+        })
+      );
+    } else {
+      Swal.fire('Error', body.msg, 'error');
+    }
+  }
+}
+
 const login = (user: User) => ({
   type: ActionTypes.authLogin,
   payload: user,
