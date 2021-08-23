@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { CustomEvent } from '../interfaces';
+import { ActionEvent } from '../interfaces/ActionEvent';
 import { ActionTypes } from '../types/types';
 
 interface initialState {
@@ -24,7 +25,7 @@ const initialState: initialState = {
   activeEvent: null,
 };
 
-export const calendarReducer = (state = initialState, action: any) => {
+export const calendarReducer = (state = initialState, action: ActionEvent) => {
   switch (action.type) {
     case ActionTypes.eventSetActive:
       return {
