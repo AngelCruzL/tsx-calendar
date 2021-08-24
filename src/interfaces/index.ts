@@ -4,6 +4,8 @@ export { ActionUI } from './ActionUI';
 export { CustomAuthenticatedRoute } from './CustomAuthenticatedRoute';
 export { CustomEvent } from './CustomEvent';
 export { CustomFetch } from './CustomFetch';
+export { EventResponse } from './EventResponse';
 export { InitialState } from './InitialState';
 export { ModalStyles } from './ModalStyles';
 export { User } from './User';
+export { UserResponse } from './UserResponse';
