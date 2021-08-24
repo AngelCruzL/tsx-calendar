@@ -15,7 +15,7 @@ import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import { messages } from '../../helpers/calendar-messages-es';
 import { CustomEvent } from '../../interfaces';
-import { clearActive, eventSetActive } from '../../actions/events';
+import { eventClearActive, eventSetActive } from '../../actions/events';
 
 import { uiOpenModal } from '../../actions/ui';
 
@@ -52,7 +52,7 @@ const CalendarScreen = () => {
   };
 
   const onSelectSlot = () => {
-    dispatch(clearActive());
+    dispatch(eventClearActive());
   };
 
   // prettier-ignore

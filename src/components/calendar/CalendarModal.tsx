@@ -6,7 +6,7 @@ import ModalContent from './ModalContent';
 import { uiCloseModal } from '../../actions/ui';
 
 import { customStyles } from './modalStyles';
-import { clearActive } from '../../actions/events';
+import { eventClearActive } from '../../actions/events';
 import { ReducersState } from '../../reducers/rootReducer';
 
 Modal.setAppElement('#root');
@@ -18,7 +18,7 @@ function CalendarModal() {
 
   const closeModal = () => {
     dispatch(uiCloseModal());
-    dispatch(clearActive());
+    dispatch(eventClearActive());
   };
 
   return (

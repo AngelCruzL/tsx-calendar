@@ -1,3 +1,5 @@
+import { CustomEvent } from './CustomEvent';
+
 interface BasicDataFetch {
   email: string;
   name?: string;
@@ -16,4 +18,8 @@ interface RegisterFetch {
   registerPasswordConfirmation: string;
 }
 
-export type CustomFetch = LoginFetch | BasicDataFetch | RegisterFetch;
+export type CustomFetch =
+  | LoginFetch
+  | BasicDataFetch
+  | RegisterFetch
+  | CustomEvent;
