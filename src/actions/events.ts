@@ -1,7 +1,8 @@
 import { Dispatch } from 'redux';
+import Swal from 'sweetalert2';
+
 import { fetchWithToken } from '../helpers/fetch';
 import { prepareEvents } from '../helpers/prepareEvents';
-
 import { CustomEvent } from '../interfaces';
 import { ActionTypes } from '../types/types';
 
@@ -37,10 +38,24 @@ export const eventSetActive = (event: CustomEvent) => ({
 
 export const eventClearActive = () => ({ type: ActionTypes.eventClearActive });
 
-export const eventUpdated = (event: CustomEvent) => ({
+const eventUpdated = (event: CustomEvent) => ({
   type: ActionTypes.eventUpdated,
   payload: event,
 });
+
+export const eventStartUpdate = (event: CustomEvent) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const resp = await fetchWithToken(`events/${event.id}`, event, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) return dispatch(eventUpdated(event));
+      else return Swal.fire('Error', body.message, 'error');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const eventDeleted = () => ({ type: ActionTypes.eventDeleted });
 

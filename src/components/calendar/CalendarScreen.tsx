@@ -66,7 +66,6 @@ const CalendarScreen = () => {
 
   // prettier-ignore
   const eventStyleGetter: EventPropGetter<CustomEvent> = (event, start, end, isSelected) => {
-    console.log(event)
     // console.log(event, start, end, isSelected);
     const style = {
       backgroundColor: uid === event.user?.uid ? '#367CF7' : 'rgb(79, 90, 135)',

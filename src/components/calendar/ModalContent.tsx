@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import Swal from 'sweetalert2';
 
 import { CustomEvent } from '../../interfaces';
-import { eventStartAddNew, eventUpdated } from '../../actions/events';
+import { eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -85,7 +85,7 @@ const ModalContent: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     }
 
     if (activeEvent) {
-      dispatch(eventUpdated(formValues));
+      dispatch(eventStartUpdate(formValues));
     } else {
       dispatch(eventStartAddNew(formValues));
     }
