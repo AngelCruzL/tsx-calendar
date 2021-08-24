@@ -37,6 +37,7 @@ const CalendarScreen = () => {
   const { events, activeEvent } = useSelector(
     (state: ReducersState) => state.calendar
   );
+  const { uid } = useSelector((state: ReducersState) => state.auth);
 
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('lastView') as View) || 'month'
@@ -65,9 +66,10 @@ const CalendarScreen = () => {
 
   // prettier-ignore
   const eventStyleGetter: EventPropGetter<CustomEvent> = (event, start, end, isSelected) => {
+    console.log(event)
     // console.log(event, start, end, isSelected);
     const style = {
-      backgroundColor: '#367CF7',
+      backgroundColor: uid === event.user?.uid ? '#367CF7' : 'rgb(79, 90, 135)',
       borderRadius: '0',
       opacity: 0.8,
       display: 'block',
