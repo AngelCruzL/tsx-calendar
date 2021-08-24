@@ -42,3 +42,20 @@ export const eventUpdated = (event: CustomEvent) => ({
 });
 
 export const eventDeleted = () => ({ type: ActionTypes.eventDeleted });
+
+export const eventStartLoading = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const resp = await fetchWithToken('events');
+      const body = await resp.json();
+      const { events } = body;
+
+      console.log(events);
+    } catch (error) {}
+  };
+};
+
+const eventLoaded = (events: CustomEvent[]) => ({
+  type: ActionTypes.eventLoaded,
+  payload: events,
+});

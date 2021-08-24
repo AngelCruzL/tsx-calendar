@@ -24,9 +24,15 @@ interface DeletedAction {
   type: ActionTypes.eventDeleted;
 }
 
+interface LoadedAction {
+  type: ActionTypes.eventLoaded;
+  payload: CustomEvent[];
+}
+
 export type ActionEvent =
   | SetActiveAction
   | AddNewAction
   | ClearActiveAction
   | UpdatedAction
-  | DeletedAction;
+  | DeletedAction
+  | LoadedAction;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -15,7 +15,11 @@ import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import { messages } from '../../helpers/calendar-messages-es';
 import { CustomEvent } from '../../interfaces';
-import { eventClearActive, eventSetActive } from '../../actions/events';
+import {
+  eventClearActive,
+  eventSetActive,
+  eventStartLoading,
+} from '../../actions/events';
 
 import { uiOpenModal } from '../../actions/ui';
 
@@ -37,6 +41,10 @@ const CalendarScreen = () => {
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem('lastView') as View) || 'month'
   );
+
+  useEffect(() => {
+    dispatch(eventStartLoading());
+  }, [dispatch]);
 
   const onDobleClick = (e: CustomEvent) => {
     dispatch(uiOpenModal());
