@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import { fetchWithToken } from '../helpers/fetch';
+import { prepareEvents } from '../helpers/prepareEvents';
 
 import { CustomEvent } from '../interfaces';
 import { ActionTypes } from '../types/types';
@@ -48,9 +49,9 @@ export const eventStartLoading = () => {
     try {
       const resp = await fetchWithToken('events');
       const body = await resp.json();
-      const { events } = body;
+      const events = prepareEvents(body.events);
 
-      console.log(events);
+      dispatch(eventLoaded(events));
     } catch (error) {}
   };
 };
