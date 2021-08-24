@@ -57,7 +57,23 @@ export const eventStartUpdate = (event: CustomEvent) => {
   };
 };
 
-export const eventDeleted = () => ({ type: ActionTypes.eventDeleted });
+const eventDeleted = () => ({ type: ActionTypes.eventDeleted });
+
+export const eventStartDelete = () => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const { id } = getState().calendar.activeEvent;
+
+    try {
+      const resp = await fetchWithToken(`events/${id}`, {}, 'DELETE');
+      const body = await resp.json();
+
+      if (body.ok) return dispatch(eventDeleted());
+      else return Swal.fire('Error', body.message, 'error');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const eventStartLoading = () => {
   return async (dispatch: Dispatch) => {
