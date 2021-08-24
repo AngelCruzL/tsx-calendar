@@ -8,6 +8,7 @@ export enum ActionTypes {
   eventUpdated = '[event] Event updated',
   eventDeleted = '[event] Event deleted',
   eventLoaded = '[event] Events loaded',
+  eventLogout = '[event] Logout',
 
   authChecking = '[auth] Checking login state',
   authCheckingFinish = '[auth] Finish checking login state',

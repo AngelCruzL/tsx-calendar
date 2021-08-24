@@ -29,10 +29,15 @@ interface LoadedAction {
   payload: CustomEvent[];
 }
 
+interface LogoutAction {
+  type: ActionTypes.eventLogout;
+}
+
 export type ActionEvent =
   | SetActiveAction
   | AddNewAction
   | ClearActiveAction
   | UpdatedAction
   | DeletedAction
-  | LoadedAction;
+  | LoadedAction
+  | LogoutAction;

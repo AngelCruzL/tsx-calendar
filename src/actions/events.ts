@@ -91,3 +91,5 @@ const eventLoaded = (events: CustomEvent[]) => ({
   type: ActionTypes.eventLoaded,
   payload: events,
 });
+
+export const eventLogout = () => ({ type: ActionTypes.eventLogout });

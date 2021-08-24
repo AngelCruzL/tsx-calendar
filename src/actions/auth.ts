@@ -1,8 +1,10 @@
 import { Dispatch } from 'redux';
 import Swal from 'sweetalert2';
+
 import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
 import { User } from '../interfaces';
 import { ActionTypes } from '../types/types';
+import { eventLogout } from './events';
 
 export const startLogin = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
@@ -79,6 +81,7 @@ export const startLogout = () => {
   return (dispatch: Dispatch) => {
     localStorage.clear();
     dispatch(logout());
+    dispatch(eventLogout());
   };
 };
 
