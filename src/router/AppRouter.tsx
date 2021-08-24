@@ -19,31 +19,27 @@ const AppRouter = () => {
     dispatch(startChecking());
   }, [dispatch]);
 
-  {
-    return checking ? (
-      <Loader />
-    ) : (
-      <Router>
-        <Switch>
-          <PublicRoute
-            exact
-            path="/login"
-            component={LoginScreen}
-            isAuthenticated={!!uid}
-          />
+  return (
+    <Router>
+      <Switch>
+        <PublicRoute
+          exact
+          path="/login"
+          component={LoginScreen}
+          isAuthenticated={!!uid}
+        />
 
-          <PrivateRoute
-            exact
-            path="/"
-            component={CalendarScreen}
-            isAuthenticated={!!uid}
-          />
+        <PrivateRoute
+          exact
+          path="/"
+          component={CalendarScreen}
+          isAuthenticated={!!uid}
+        />
 
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-    );
-  }
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+  );
 };
 
 export default AppRouter;
