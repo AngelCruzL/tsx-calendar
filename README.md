@@ -30,3 +30,9 @@ You can run the project with the following command:
 ```bash
 yarn dev
 ```
+
+## Deployment
+
+You can see the project deployed in the following link:
+
+[Calendar App](https://calendar-app.angelcruzl.dev)
